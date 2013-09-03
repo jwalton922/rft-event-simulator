@@ -96,7 +96,8 @@ public class TrackGenerator implements Serializable {
         double lon1 = toRads(current.getLon());
 //        double lat2 = endLat;
 //        double lon2 = endLon;
-        double brng = toRads(calcBearing(lat1, lon1, toRads(endLat), toRads(endLon)));
+        double brngDegs = calcBearing(lat1, lon1, toRads(endLat), toRads(endLon));
+        double brng = toRads(brngDegs);
 
         double lat2 = Math.asin(Math.sin(lat1) * Math.cos(d / R) + Math.cos(lat1) * Math.sin(d / R) * Math.cos(brng));
         double lon2 = lon1 + Math.atan2(Math.sin(brng) * Math.sin(d / R) * Math.cos(lat1), Math.cos(d / R) - Math.sin(lat1) * Math.sin(lat2));
@@ -116,7 +117,7 @@ public class TrackGenerator implements Serializable {
        
         
         Position p = new Position(lat2, lon2, current.getTimestamp() + timeElapsed);
-
+        p.setHeading(brngDegs);
         return p;
     }
 

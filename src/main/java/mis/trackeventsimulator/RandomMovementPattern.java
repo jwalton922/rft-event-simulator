@@ -28,8 +28,10 @@ public class RandomMovementPattern implements MovementPattern, Serializable{
                 foundNewCity = true;
             }
         }
-        
-        return new Position(currentCity.lat, currentCity.lon, 0);
+        Position position = new Position(currentCity.lat, currentCity.lon, 0);
+        position.setProperty("DESTINATION_CITY", currentCity.name);
+        position.setProperty("DESTINATION_COUNTRY", currentCity.countryCode);
+        return position;
     }
     
 }

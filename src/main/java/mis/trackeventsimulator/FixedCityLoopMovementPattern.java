@@ -27,8 +27,10 @@ public class FixedCityLoopMovementPattern implements MovementPattern, Serializab
         }
         
         City nextCity = cityLoopList.get(currentCityIndex);
-        
-        return new Position(nextCity.lat, nextCity.lon, 0);
+        Position position = new Position(nextCity.lat, nextCity.lon, 0);
+        position.setProperty("DESTINATION_CITY", nextCity.name);
+        position.setProperty("DESTINATION_COUNTRY", nextCity.countryCode);
+        return position;
     }       
     
 }

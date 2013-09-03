@@ -6,6 +6,8 @@ package mis.trackeventsimulator;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -16,6 +18,8 @@ public class Position implements Serializable{
     private double lat;
     private double lon;
     private long timestamp;
+    private double heading = 0.0;
+    private Map<String,Object> metadata = new HashMap<String,Object>();
     
     public Position(double lat, double lon, long timestamp){
         this.lat = lat;
@@ -45,6 +49,26 @@ public class Position implements Serializable{
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public double getHeading() {
+        return heading;
+    }
+
+    public void setHeading(double heading) {
+        this.heading = heading;
+    }
+    
+    public Map<String,Object> getMetadata(){
+        return this.metadata;
+    }
+    
+    public void setProperty(String key, Object value){
+        this.metadata.put(key, value);
+    }
+    
+    public Object getPropetyValue(String key){
+        return this.metadata.get(key);
     }
     
     @Override
